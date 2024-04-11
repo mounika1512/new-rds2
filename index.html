@@ -77,6 +77,7 @@
             <option value="">All</option>
             <option value="Done">Done</option>
             <option value="Fail">Fail</option>
+            <option value="Ins">Ins</option>
         </select>
     </div>
     <div class="input-container">
@@ -111,7 +112,14 @@
         }
 
         function generateRandomStatus() {
-          return Math.random() < 0.5 ? 'Done' : 'Fail';
+          const randomNumber = Math.random();
+          if (randomNumber < 0.1) {
+              return 'Ins'; // 10% chance for "Ins"
+          } else if (randomNumber < 0.3) {
+              return 'Fail'; // 20% chance for "Fail"
+          } else {
+              return 'Done'; // 70% chance for "Done"
+          }
         }
 
         function clearReport() {
@@ -163,7 +171,7 @@
                 statusCell.classList.remove('statusDone', 'statusFail');
                 if (status === 'Done') {
                   statusCell.classList.add('statusDone');
-                } else {
+                } else if (status === 'Fail') {
                   statusCell.classList.add('statusFail');
                 }
               }
@@ -214,4 +222,3 @@
     </script>
 </body>
 </html>
-
